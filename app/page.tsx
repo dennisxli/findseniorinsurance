@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Image from "next/image";
 
 const coverageOptions = [
   {
@@ -131,9 +132,12 @@ export default function Home() {
 
             <div className="hero-visual">
               <div className="photo-frame">
-                <img
+                <Image
                   src="/senior-couple.jpg"
                   alt="A senior couple laughing together at home"
+                  fill
+                  priority
+                  sizes="(max-width: 760px) calc(100vw - 34px), (max-width: 960px) 42vw, 500px"
                 />
               </div>
               <div className="photo-note">

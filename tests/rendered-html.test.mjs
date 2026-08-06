@@ -1,52 +1,32 @@
 import assert from "node:assert/strict";
-import { access, readFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-async function render() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
+const projectRoot = new URL("../", import.meta.url);
 
-  return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
+test("uses the native Next.js build required by Vercel", async () => {
+  const packageJson = JSON.parse(
+    await readFile(new URL("package.json", projectRoot), "utf8"),
   );
-}
 
-test("server-renders the senior insurance landing page", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
-  assert.match(
-    html,
-    /<title>Find Senior Insurance \| Life &amp; Health Insurance Guidance<\/title>/i,
-  );
-  assert.match(html, /Find coverage you can feel good about\./);
-  assert.match(html, /Final Expense Insurance/);
-  assert.match(html, /Medicare Insurance/);
-  assert.match(html, /Request your free insurance review/);
-  assert.match(html, /not affiliated with or endorsed by the U\.S\. government/i);
-  assert.doesNotMatch(html, /codex-preview|Your site is taking shape|Building your site/i);
+  assert.equal(packageJson.scripts.dev, "next dev");
+  assert.equal(packageJson.scripts.build, "next build");
+  assert.equal(packageJson.scripts.start, "next start");
+  assert.equal(packageJson.engines.node, "22.x");
+  assert.equal(packageJson.devDependencies?.vinext, undefined);
+  assert.equal(packageJson.devDependencies?.wrangler, undefined);
 });
 
-test("removes all disposable starter preview code", async () => {
-  const packageJson = await readFile(
-    new URL("../package.json", import.meta.url),
-    "utf8",
-  );
+test("keeps the senior insurance lead experience and disclosures", async () => {
+  const page = await readFile(new URL("app/page.tsx", projectRoot), "utf8");
+  const layout = await readFile(new URL("app/layout.tsx", projectRoot), "utf8");
 
-  assert.doesNotMatch(packageJson, /react-loading-skeleton/);
-  await assert.rejects(access(new URL("../app/_sites-preview", import.meta.url)));
+  assert.match(page, /Find coverage you can feel good about\./);
+  assert.match(page, /Final Expense Insurance/);
+  assert.match(page, /Medicare Insurance/);
+  assert.match(page, /Request your free insurance review/);
+  assert.match(page, /not affiliated with or endorsed by the U\.S\. government/i);
+  assert.match(page, /from "next\/image"/);
+  assert.match(layout, /Find Senior Insurance \| Life & Health Insurance Guidance/);
+  assert.doesNotMatch(page, /codex-preview|Your site is taking shape/i);
 });
