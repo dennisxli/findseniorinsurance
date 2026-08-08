@@ -9,36 +9,41 @@ const coverageOptions = [
     eyebrow: "LIFE INSURANCE",
     title: "Final Expense Insurance",
     description:
-      "Explore coverage designed to help your family with funeral costs, medical bills, and other end-of-life expenses.",
-    bullets: ["Simple coverage options", "Plans for a range of health histories"],
-    action: "Explore final expense",
+      "Look beyond the monthly price and understand how coverage may support the people you care about when it matters most.",
+    bullets: ["Understand benefit amounts and waiting periods", "Consider what fits your family and budget"],
+    action: "Navigate final expense",
   },
   {
     value: "medicare",
     eyebrow: "HEALTH INSURANCE",
     title: "Medicare Insurance",
     description:
-      "Understand private Medicare insurance options that may help with the health care costs and benefits important to you.",
-    bullets: ["Clear, one-on-one guidance", "Compare available plan choices"],
-    action: "Explore Medicare insurance",
+      "Make sense of private Medicare insurance choices by focusing on the doctors, prescriptions, benefits, and costs that matter to you.",
+    bullets: ["Know which questions to ask before choosing", "Explore options available where you live"],
+    action: "Navigate Medicare insurance",
   },
 ];
 
 const faqs = [
   {
-    question: "Is your service really free?",
+    question: "What makes Find Senior Insurance different?",
+    answer:
+      "We help you look at the whole picture across final expense and Medicare insurance. Our process begins with your priorities, explains the tradeoffs in plain language, and keeps the final decision where it belongs—with you.",
+  },
+  {
+    question: "Is your guidance really free?",
     answer:
       "Yes. There is no cost to request information or speak with a licensed insurance agent, and you are never obligated to enroll in a plan.",
   },
   {
     question: "Will I be pressured to buy something?",
     answer:
-      "Our goal is to help you understand your choices. You decide if and when a policy is right for you. Requesting information does not require you to make a purchase.",
+      "No. Our role is to help you understand the choices and questions in front of you. You decide if and when a policy is right for you. Requesting guidance does not require you to make a purchase.",
   },
   {
     question: "Can I get help if I already have coverage?",
     answer:
-      "Absolutely. You can request a review to better understand your current coverage and learn whether other options may be available in your area.",
+      "Absolutely. A review can help you understand what you already have, identify questions worth asking, and learn whether other options may be available in your area.",
   },
   {
     question: "Do you represent Medicare or the government?",
@@ -74,34 +79,24 @@ export default function Home() {
         Skip to main content
       </a>
 
-      <div className="trust-strip">
-        <div className="page-width trust-strip-inner">
-          <span>Free service</span>
-          <span aria-hidden="true">•</span>
-          <span>No obligation</span>
-          <span aria-hidden="true">•</span>
-          <span>Personal help from licensed insurance agents</span>
-        </div>
-      </div>
-
       <header className="site-header">
         <div className="page-width header-inner">
           <a className="brand" href="#top" aria-label="Find Senior Insurance home">
-            <span className="brand-mark" aria-hidden="true">FSI</span>
+            <Image className="brand-mark" src="/logo-mark.png" alt="" width={58} height={58} priority />
             <span className="brand-copy">
-              <strong>Find Senior</strong>
-              <span>Insurance</span>
+              <strong>Find Senior Insurance</strong>
+              <span>Navigate with confidence</span>
             </span>
           </a>
 
           <nav className="desktop-nav" aria-label="Main navigation">
+            <a href="#why-us">Why us</a>
             <a href="#coverage">Coverage</a>
             <a href="#how-it-works">How it works</a>
-            <a href="#faq">Questions</a>
           </nav>
 
           <button className="header-cta" type="button" onClick={() => scrollToForm()}>
-            Get free help
+            Talk with a guide
           </button>
         </div>
       </header>
@@ -110,23 +105,23 @@ export default function Home() {
         <section className="hero" id="top">
           <div className="page-width hero-grid">
             <div className="hero-copy">
-              <p className="section-kicker">INSURANCE GUIDANCE FOR YOUR NEXT CHAPTER</p>
-              <h1>Find coverage you can feel good about.</h1>
+              <p className="section-kicker">YOUR GUIDE. YOUR ADVOCATE. YOUR CHOICE.</p>
+              <h1>A clearer path through life &amp; Medicare insurance.</h1>
               <p className="hero-lede">
-                Get straightforward help comparing life and health insurance options for seniors—at your pace, with no obligation.
+                Senior insurance can be complicated. We help you understand the tradeoffs, ask the right questions, and find options that fit your life—not the other way around.
               </p>
               <div className="hero-actions">
                 <button className="primary-button" type="button" onClick={() => scrollToForm()}>
-                  Find my options
+                  Help me find my path
                 </button>
-                <a className="text-link" href="#coverage">
-                  See coverage types <span aria-hidden="true">→</span>
+                <a className="text-link" href="#why-us">
+                  Why we&apos;re different <span aria-hidden="true">→</span>
                 </a>
               </div>
               <ul className="reassurance-list" aria-label="Service benefits">
-                <li><span aria-hidden="true">✓</span> Easy-to-understand explanations</li>
-                <li><span aria-hidden="true">✓</span> Plans based on your needs and location</li>
-                <li><span aria-hidden="true">✓</span> Your choice, from start to finish</li>
+                <li><span aria-hidden="true">✓</span> We start with your priorities—not a plan</li>
+                <li><span aria-hidden="true">✓</span> We translate fine print into plain English</li>
+                <li><span aria-hidden="true">✓</span> You stay in control from start to finish</li>
               </ul>
             </div>
 
@@ -141,28 +136,47 @@ export default function Home() {
                 />
               </div>
               <div className="photo-note">
-                <span className="photo-note-icon" aria-hidden="true">✓</span>
-                <p><strong>Friendly, personal guidance</strong><br />Speak with a licensed insurance agent.</p>
+                <Image src="/logo-mark.png" alt="" width={42} height={42} aria-hidden="true" />
+                <p><strong>An advocate in your corner</strong><br />Clear guidance centered on what matters to you.</p>
               </div>
               <p className="photo-credit">Photo by Gustavo Fring / Pexels</p>
             </div>
           </div>
         </section>
 
-        <section className="confidence-bar" aria-label="What to expect">
-          <div className="page-width confidence-grid">
-            <div><strong>Free</strong><span>There is no cost to compare</span></div>
-            <div><strong>Simple</strong><span>Plain answers, not insurance jargon</span></div>
-            <div><strong>Personal</strong><span>Help based on what matters to you</span></div>
+        <section className="difference-section" id="why-us">
+          <div className="page-width">
+            <div className="difference-intro">
+              <p className="section-kicker">WHY FIND SENIOR INSURANCE</p>
+              <h2>Insurance guidance built around the person—not the policy.</h2>
+              <p>Most insurance sites begin with products. We begin with your life, your concerns, and the people you want to protect.</p>
+            </div>
+            <div className="difference-grid">
+              <article>
+                <span className="difference-number">01</span>
+                <h3>See the whole picture</h3>
+                <p>One trusted place to navigate final expense and Medicare insurance instead of sorting through disconnected advice.</p>
+              </article>
+              <article>
+                <span className="difference-number">02</span>
+                <h3>Understand the tradeoffs</h3>
+                <p>We turn insurance language into clear questions about cost, coverage, timing, doctors, prescriptions, and family needs.</p>
+              </article>
+              <article>
+                <span className="difference-number">03</span>
+                <h3>Keep the choice yours</h3>
+                <p>We help you prepare for a productive conversation with a licensed agent—without rushing the decision.</p>
+              </article>
+            </div>
           </div>
         </section>
 
         <section className="coverage-section" id="coverage">
           <div className="page-width">
             <div className="section-heading centered-heading">
-              <p className="section-kicker">START WITH WHAT YOU NEED</p>
-              <h2>Two important ways to protect what matters</h2>
-              <p>We make it easier to learn about coverage without making you sort through it alone.</p>
+              <p className="section-kicker">ONE GUIDE FOR THE ROAD AHEAD</p>
+              <h2>Two important decisions. One trusted place to start.</h2>
+              <p>Navigate coverage for your health and your family without being sent from site to site or left to decode it alone.</p>
             </div>
 
             <div className="coverage-grid">
@@ -191,27 +205,27 @@ export default function Home() {
         <section className="process-section" id="how-it-works">
           <div className="page-width process-grid">
             <div className="process-intro">
-              <p className="section-kicker">A CLEARER WAY FORWARD</p>
-              <h2>Getting help should feel simple.</h2>
+              <p className="section-kicker">HOW WE ADVOCATE FOR YOU</p>
+              <h2>Guidance that starts with your life, not a product.</h2>
               <p>
-                You do not have to become an insurance expert. Tell us a little about what you are looking for, and a licensed agent can help you understand the next step.
+                You do not need to become an insurance expert. We help you organize what matters, understand the choices, and enter the next conversation with confidence.
               </p>
               <button className="secondary-button" type="button" onClick={() => scrollToForm()}>
-                Start my free request
+                Start with my priorities
               </button>
             </div>
             <ol className="steps-list">
               <li>
                 <span className="step-number">1</span>
-                <div><h3>Tell us what you need</h3><p>Answer a few basic questions about the type of coverage you want.</p></div>
+                <div><h3>Start with your priorities</h3><p>Tell us what you want to protect, what feels unclear, and the type of help you need.</p></div>
               </li>
               <li>
                 <span className="step-number">2</span>
-                <div><h3>Connect with a licensed agent</h3><p>Ask questions and discuss plans that may be available where you live.</p></div>
+                <div><h3>Untangle the choices</h3><p>Get plain-English context and practical questions to help you understand the tradeoffs.</p></div>
               </li>
               <li>
                 <span className="step-number">3</span>
-                <div><h3>Choose with confidence</h3><p>Take your time. You decide whether any option is right for you.</p></div>
+                <div><h3>Move forward on your terms</h3><p>Connect with a licensed agent to discuss available options. Take your time; the choice remains yours.</p></div>
               </li>
             </ol>
           </div>
@@ -220,17 +234,17 @@ export default function Home() {
         <section className="request-section" id="request-help">
           <div className="page-width request-grid">
             <div className="request-copy">
-              <p className="section-kicker">FREE, PERSONALIZED HELP</p>
-              <h2>Let&apos;s find the right place to start.</h2>
+              <p className="section-kicker">YOUR QUESTIONS COME FIRST</p>
+              <h2>Tell us where insurance feels unclear.</h2>
               <p className="request-lede">
-                Complete this short form and a licensed insurance professional can contact you to discuss your options.
+                Share a little about what you need. A licensed insurance professional can contact you to help you discuss available options and next steps.
               </p>
               <div className="what-you-get">
-                <h3>What you can expect</h3>
+                <h3>What your conversation can cover</h3>
                 <ul>
-                  <li><span aria-hidden="true">✓</span> A friendly conversation about your needs</li>
-                  <li><span aria-hidden="true">✓</span> Clear answers to your questions</li>
-                  <li><span aria-hidden="true">✓</span> No cost and no obligation to enroll</li>
+                  <li><span aria-hidden="true">✓</span> The people, costs, and benefits that matter to you</li>
+                  <li><span aria-hidden="true">✓</span> Questions about your current or future coverage</li>
+                  <li><span aria-hidden="true">✓</span> Options available in your area, with no obligation to enroll</li>
                 </ul>
               </div>
               <p className="government-note">
@@ -252,7 +266,7 @@ export default function Home() {
               ) : (
                 <form onSubmit={handleSubmit}>
                   <p className="form-step">TAKES ABOUT 2 MINUTES</p>
-                  <h3>Request your free insurance review</h3>
+                  <h3>Start your free guidance request</h3>
 
                   <fieldset>
                     <legend>What would you like help with?</legend>
@@ -301,7 +315,7 @@ export default function Home() {
                     </span>
                   </label>
 
-                  <button className="submit-button" type="submit">Request my free review</button>
+                  <button className="submit-button" type="submit">Request my guidance call</button>
                   <p className="form-fine-print">Your information is used to respond to your insurance request.</p>
                 </form>
               )}
@@ -312,9 +326,9 @@ export default function Home() {
         <section className="faq-section" id="faq">
           <div className="page-width faq-grid">
             <div className="faq-heading">
-              <p className="section-kicker">COMMON QUESTIONS</p>
-              <h2>Answers you can understand.</h2>
-              <p>Good decisions start with clear information. Here are a few things people often ask us.</p>
+              <p className="section-kicker">CLEAR ANSWERS, NO RUNAROUND</p>
+              <h2>Know what to expect before you begin.</h2>
+              <p>Good decisions start with clear information—and enough room to make the choice your own.</p>
             </div>
             <div className="faq-list">
               {faqs.map((faq) => (
@@ -329,8 +343,8 @@ export default function Home() {
 
         <section className="closing-cta">
           <div className="page-width closing-inner">
-            <div><p className="section-kicker">MOVE FORWARD WITH CLARITY</p><h2>Let&apos;s make insurance feel easier.</h2></div>
-            <button className="light-button" type="button" onClick={() => scrollToForm()}>Find my options</button>
+            <div><p className="section-kicker">A BETTER WAY THROUGH INSURANCE</p><h2>Clarity for the road ahead.</h2></div>
+            <button className="light-button" type="button" onClick={() => scrollToForm()}>Talk with a guide</button>
           </div>
         </section>
       </main>
@@ -339,10 +353,10 @@ export default function Home() {
         <div className="page-width">
           <div className="footer-main">
             <a className="brand footer-brand" href="#top" aria-label="Find Senior Insurance home">
-              <span className="brand-mark" aria-hidden="true">FSI</span>
-              <span className="brand-copy"><strong>Find Senior</strong><span>Insurance</span></span>
+              <Image className="brand-mark" src="/logo-mark.png" alt="" width={58} height={58} />
+              <span className="brand-copy"><strong>Find Senior Insurance</strong><span>Navigate with confidence</span></span>
             </a>
-            <p>Helping seniors find clear, personal guidance for life and health insurance.</p>
+            <p>Helping seniors navigate life and Medicare insurance with clarity, confidence, and a guide on their side.</p>
             <div className="footer-links">
               <a href="#coverage">Coverage</a>
               <a href="#how-it-works">How it works</a>
@@ -363,7 +377,7 @@ export default function Home() {
       </footer>
 
       <button className="mobile-sticky-cta" type="button" onClick={() => scrollToForm()}>
-        Get free help
+        Talk with a guide
       </button>
     </div>
   );
