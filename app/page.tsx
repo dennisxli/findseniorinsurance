@@ -1,7 +1,8 @@
 "use client";
 
-import { FormEvent, useState } from "react";
 import Image from "next/image";
+import LeadForm from "@/app/components/LeadForm";
+import { trackFunnelEvent } from "@/app/lib/attribution";
 
 const coverageOptions = [
   {
@@ -63,16 +64,10 @@ function scrollToForm(coverage?: string) {
     behavior: "smooth",
     block: "start",
   });
+  trackFunnelEvent("lead_cta_clicked", { coverage, source_page: "homepage" });
 }
 
 export default function Home() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmitted(true);
-  }
-
   return (
     <div className="site-shell">
       <a className="skip-link" href="#main-content">
@@ -96,7 +91,7 @@ export default function Home() {
           </nav>
 
           <button className="header-cta" type="button" onClick={() => scrollToForm()}>
-            Talk with a guide
+            Help Me Compare My Options
           </button>
         </div>
       </header>
@@ -112,7 +107,7 @@ export default function Home() {
               </p>
               <div className="hero-actions">
                 <button className="primary-button" type="button" onClick={() => scrollToForm()}>
-                  Help me find my path
+                  Help Me Compare My Options
                 </button>
                 <a className="text-link" href="#why-us">
                   Why we&apos;re different <span aria-hidden="true">→</span>
@@ -252,74 +247,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="form-card">
-              {submitted ? (
-                <div className="success-message" role="status" tabIndex={-1}>
-                  <span className="success-icon" aria-hidden="true">✓</span>
-                  <p className="form-step">REQUEST RECEIVED</p>
-                  <h3>Thank you. We&apos;re ready to help.</h3>
-                  <p>A licensed insurance professional will contact you to talk through your request.</p>
-                  <button className="secondary-button" type="button" onClick={() => setSubmitted(false)}>
-                    Submit another request
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit}>
-                  <p className="form-step">TAKES ABOUT 2 MINUTES</p>
-                  <h3>Start your free guidance request</h3>
-
-                  <fieldset>
-                    <legend>What would you like help with?</legend>
-                    <div className="radio-grid">
-                      <label>
-                        <input type="radio" name="coverage" value="final-expense" required />
-                        <span>Final expense</span>
-                      </label>
-                      <label>
-                        <input type="radio" name="coverage" value="medicare" required />
-                        <span>Medicare insurance</span>
-                      </label>
-                      <label>
-                        <input type="radio" name="coverage" value="both" required />
-                        <span>Both</span>
-                      </label>
-                    </div>
-                  </fieldset>
-
-                  <div className="field-row">
-                    <label>First name<input type="text" name="firstName" autoComplete="given-name" required /></label>
-                    <label>Last name<input type="text" name="lastName" autoComplete="family-name" required /></label>
-                  </div>
-
-                  <div className="field-row">
-                    <label>ZIP code<input type="text" name="zip" inputMode="numeric" autoComplete="postal-code" pattern="[0-9]{5}" maxLength={5} required /></label>
-                    <label>Age range
-                      <select name="ageRange" required defaultValue="">
-                        <option value="" disabled>Select one</option>
-                        <option>50–59</option>
-                        <option>60–64</option>
-                        <option>65–69</option>
-                        <option>70–79</option>
-                        <option>80 or older</option>
-                      </select>
-                    </label>
-                  </div>
-
-                  <label>Phone number<input type="tel" name="phone" inputMode="tel" autoComplete="tel" required /></label>
-                  <label>Email address <span className="optional">(optional)</span><input type="email" name="email" autoComplete="email" /></label>
-
-                  <label className="consent-label">
-                    <input type="checkbox" name="consent" required />
-                    <span>
-                      I agree that Find Senior Insurance and its insurance partners may contact me at the phone number provided about insurance products, including by phone or text using automated technology. Consent is not a condition of purchase. Message and data rates may apply.
-                    </span>
-                  </label>
-
-                  <button className="submit-button" type="submit">Request my guidance call</button>
-                  <p className="form-fine-print">Your information is used to respond to your insurance request.</p>
-                </form>
-              )}
-            </div>
+            <LeadForm sourcePage="homepage" />
           </div>
         </section>
 
@@ -344,7 +272,7 @@ export default function Home() {
         <section className="closing-cta">
           <div className="page-width closing-inner">
             <div><p className="section-kicker">A BETTER WAY THROUGH INSURANCE</p><h2>Clarity for the road ahead.</h2></div>
-            <button className="light-button" type="button" onClick={() => scrollToForm()}>Talk with a guide</button>
+            <button className="light-button" type="button" onClick={() => scrollToForm()}>Help Me Compare My Options</button>
           </div>
         </section>
       </main>
@@ -361,7 +289,7 @@ export default function Home() {
               <a href="#coverage">Coverage</a>
               <a href="#how-it-works">How it works</a>
               <a href="#faq">Questions</a>
-              <a href="#privacy">Privacy &amp; terms</a>
+              <a href="/privacy">Privacy Policy</a>
             </div>
           </div>
           <div className="footer-disclosures" id="privacy">
@@ -377,7 +305,7 @@ export default function Home() {
       </footer>
 
       <button className="mobile-sticky-cta" type="button" onClick={() => scrollToForm()}>
-        Talk with a guide
+        Help Me Compare My Options
       </button>
     </div>
   );

@@ -27,12 +27,16 @@ coverage, lead form, and consumer disclosure content render correctly.
 
 ## Current scope
 
-- One-page senior insurance landing experience
-- Final expense and Medicare insurance coverage paths
-- Accessible, responsive lead request form
-- Required Medicare non-affiliation and product disclosures
-- Local demonstration submission state
+- Main senior insurance landing experience
+- Dedicated final expense and Medicare paid-traffic pages
+- Accessible three-step lead form with conditional qualification
+- First-touch and last-touch campaign attribution
+- HubSpot form delivery plus optional generic webhook delivery
+- Google Analytics funnel events when configured
+- Privacy, TCPA-style communications, Medicare, and product disclosures
 
-The current form is a front-end demonstration. Connect it to an approved lead
-delivery or customer-management system before using the site to collect real
-consumer information.
+Copy `.env.example` to `.env.local` for development and add the same required
+values to Vercel before collecting real consumer information. The form will not
+show a successful submission until a configured destination accepts the lead.
+See `docs/lead-funnel.md` for HubSpot setup, attribution fields, pipeline stages,
+and revenue reporting.
